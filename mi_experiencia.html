@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Experiencia Laboral</title>
+  <style>
+    :root {
+      --gradient: linear-gradient(135deg,#00c6ff,#ff0080);
+      --card-bg: #111;
+      --muted: #aaa;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    h2, h3, h4 {
+      margin: 0;
+    }
+
+     a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Barra de navegación */
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 15px 20px;
+      display: flex;
+      gap: 20px;
+      background: rgba(0,0,0,0.7);
+      border-bottom-left-radius: 10px;
+      z-index: 100;
+    }
+
+    nav a {
+      font-weight: bold;
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #f1f1f1;
+    }
+
+
+    /* Sección 1: Experiencia Laboral */
+    .section-experience {
+      width: 100%;
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .section-experience h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #fff;
+      z-index: 2;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .boxes {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      overflow: hidden;
+    }
+
+    .box-outer {
+      clip-path: polygon(5% 0, 95% 0, 100% 15%, 100% 85%, 95% 100%, 5% 100%, 0 85%, 0 15%);
+      background: var(--gradient);
+      padding: 3px;
+      transition: transform .35s ease;
+    }
+
+    .box-outer:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 0 25px rgba(0,198,255,0.35),
+                  0 0 35px rgba(142,45,226,0.25),
+                  0 0 50px rgba(255,0,128,0.2);
+    }
+
+    .box {
+      background: var(--card-bg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .box img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+
+    .box h2 {
+      font-size: 1.4rem;
+      color: #FFFFFF;
+    }
+
+    .box .subheading,
+    .box .tenure,
+    .box .description {
+      display: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: opacity 0.3s ease;
+    }
+
+    .box-outer:hover .subheading,
+    .box-outer:hover .tenure,
+    .box-outer:hover .description {
+      display: block;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background-color: rgba(255,255,255,0.2);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      z-index: 10;
+      transition: background-color 0.3s;
+    }
+
+    .carousel-arrow:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* Sección 2: Adicionales */
+    .section-additional {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 40px;
+      padding: 50px 40px;
+      background-color: #111;
+    }
+
+    /* Dropdowns */
+    .additional-list h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    details {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    details:hover {
+      background: #222;
+    }
+
+    summary {
+      font-weight: bold;
+      font-size: 1.1rem;
+      list-style: none;
+    }
+
+    details[open] {
+      background: #2a2a2a;
+    }
+
+    details ul {
+      margin: 10px 0 0 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Carrusel 2 */
+    .additional-carousel-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .additional-box {
+      background-color: #fff;
+      color: #000;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      width: 100%;
+      max-width: 500px;
+      padding: 25px;
+      position: relative;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .additional-box::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 40px;
+      border-width: 15px 15px 0;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    .additional-box img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .additional-box h4 {
+      margin: 5px 0;
+      font-size: 1.2rem;
+    }
+
+    .additional-box p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Descargas (solo borde) */
+    .downloads {
+      margin-top: 50px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .downloads a {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 2px solid #ffffff;
+      background: transparent;
+      color: #ffffff;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+
+       footer {
+      background: #0a0a0a;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+      gap: 150px;
+      border-top: 2px solid #222;
+    }
+
+    footer img {
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-info div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .footer-info i {
+      color: #ffffff;
+      font-size: 1.2rem;
+    }
+
+    @media(max-width: 900px) {
+      .section-additional { grid-template-columns: 1fr; }
+      .carousel-arrow.left { left: 10px; }
+      .carousel-arrow.right { right: 10px; }
+      .boxes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="mi_portafolio.html">Mi portafolio</a>
+  </nav>
+  <!-- Sección 1: Carrusel 1 -->
+  <section class="section-experience">
+    <h2>Mi experiencia laboral</h2>
+    <div class="carousel-wrapper">
+      <div class="carousel-arrow left" onclick="prevExperience()">&#10094;</div>
+      <div class="boxes" id="experienceCarousel"></div>
+      <div class="carousel-arrow right" onclick="nextExperience()">&#10095;</div>
+    </div>
+  </section>
+
+  <!-- Sección 2: Adicionales -->
+  <section class="section-additional">
+    <div class="additional-list">
+      <h3 class="Additional-list_heading">Extras</h3>
+
+      <details>
+        <summary>Estudios</summary>
+        <ul>
+          <li>Licenciatura en mercadotecnia - Universidad de Colima</li>
+          <li>Ingenieria en diseño de software y redes - UVM</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Programas</summary>
+        <ul>
+          <li>Google Ads</li>
+          <li>Google Analytics</li>
+          <li>Google Tag Manager</li>
+          <li>Google Search Console</li>
+          <li>Google Trends</li>
+          <li>Meta Business Suite</li>
+          <li>Meta Pixel</li>
+          <li>Ads manager</li>
+             <li>Trello</li>
+             <li>Sendible</li>
+                <li>Hubspot</li>
+                   <li>Zoho</li>
+                   <li>Monday</li>
+                      <li>Mailchimp</li>
+                         <li>Brevo</li>
+                         <li>Wordpress</li>
+                         <li>Visual Studio Code</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Softwares</summary>
+        <ul>
+          <li>Microsoft</li>
+          <li>Adobe</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Key Skills</summary>
+        <ul>
+          <li>Estrategias de marketing digital</li>
+          <li>Manejo de redes sociales</li>
+          <li>Analisis de data y metricas</li>
+          <li>Creacion de contenido</li>
+          <li>SEO marketing</li>
+          <li>Email marketing</li>
+          <li>Manejo de proyectos</li>
+          <li>Investigacion de mercado</li>
+          <li>Brandeo</li>
+          <li>Relaciones publicas</li>
+          <li>Diseño Web</li>
+          <li>HTML, CSS y Javascript</li>
+          <li>Comunicacion</li>
+          <li>Creatividad</li>
+          <li>Liderazgo</li>
+          <li>Busqueda de Innovacion</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="additional-carousel-container">
+      <div class="carousel-arrow left" onclick="prevAdditional()">&#10094;</div>
+      <div class="additional-box" id="additionalBox"></div>
+      <div class="carousel-arrow right" onclick="nextAdditional()">&#10095;</div>
+
+      <!-- Botones debajo del carrusel -->
+      <div class="downloads">
+        <a href="https://pan-cho.com/wp-content/uploads/2025/09/Recommendation_Letter.pdf" download>Carta laboral</a>
+        <a href="https://pan-cho.com/wp-content/uploads/2025/09/Carta-de-Recomendacion-Francisco-Jose-Lopez-Moreno-Medrano.pdf" download>Carta Personal</a>
+      </div>
+    </div>
+  </section>
+    <footer>
+    <div>
+      <img src="https://pan-cho.com/wp-content/uploads/2025/09/francisco-logo.png" alt="Logo">
+    </div>
+    <div class="footer-info">
+        <h2 class="footer_heading">Informacion de contacto</h2>
+      <div><i class="fas fa-phone"></i> +52 312 193 1392</div>
+      <div><i class="fas fa-envelope"></i> flomm2312@gmail.com</div>
+      <div><i class="fas fa-map-marker-alt"></i> Colima, México</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Carrusel 1: Experiencia laboral ---
+    const experienceData = [
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/INTUGO-LOGO.png',
+        title: 'Intugo',
+        puesto: 'Coordinador de Mercadotecnia',
+        tiempo: 'Julio 2024 - Actual',
+        desc: 'Analisis de resultados de campañas, manejo de presupuestos para campañas de distintos clientes, creacion de campañas, conversiones y tags'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/logo-ep.png',
+        title: 'E&P Insurance',
+        puesto: 'Marketing Manager',
+        tiempo: 'Enero 2024 - Septiembre 2025',
+        desc: 'Diseño de contenidos, diseño de correos, diseño web, planeacion, analisis de resultados y diseño de campañas'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/logo-elemon-1.png',
+        title: 'E-lemon web marketing solutions',
+        puesto: 'Marketing Manager',
+        tiempo: 'Diciembre 2022 - Febrero 2024',
+        desc: 'Lider de proyectos de mercadotecnia, encargado de las estrategias de marketing digital, planeación de contenidos, analisis, gestion, diseño y creación de campañas publicitarias enfocada en los objetivos de los clientes '
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/autocity-logo.png',
+        title: 'Autocity',
+        puesto: 'Community Manager',
+        tiempo: 'Enero 2023 - Septiembre 2023',
+        desc: 'Responder mensajes de manera rapida, dividir a los usuarios por grupos de marketing y de ventas para un correcto seguimiento, evaluación y entrega de resultados mensuales en comparativa con mes previo y con la competencia, analisis de los resultados de campaña publicitaria, gestion de usuarios que solicitasen factura y administración de la base de datos de clientes'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/grupo-salinas-logo.png',
+        title: 'Grupo Salinas',
+        puesto: 'Promotor',
+        tiempo: 'Octubre 2021 - Enero 2023',
+        desc: 'Recepción de clientes, inventario, valuación, ventas, manejo de efectivo, email marketing y telemarketing'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/mondou-logo.png',
+        title: 'Mondou VIP',
+        puesto: 'Community Manager',
+        tiempo: 'Enero 2019 - Agosto 2019',
+        desc: 'Community manager, planificación creación y edicion de contenido, manejo de diseño de cuenta'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/NEXOUD-LOGO.png',
+        title: 'Nexoud',
+        puesto: 'Especialista en Marketing',
+        tiempo: 'Octubre 2018 - Diciembre 2018',
+        desc: 'Marketing digital e inventarios, recomendado por la Universidad de Colima'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/LA-ARGENTINA-LOGO.png',
+        title: 'La argentina servicios y porteo',
+        puesto: 'Coordinador Administrativo',
+        tiempo: 'Octubre 2017 - Septiembre 2018',
+        desc: 'Coordinador administrativo, inventarios y logistica'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/dairy-queen-logo-1.png',
+        title: 'Dairy Queen',
+        puesto: 'Cajero',
+        tiempo: 'Abril 2017 - Agosto 2017',
+        desc: 'Coordinador administrativo, inventarios y logistica'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/nissan-rancagua-logo-1.png',
+        title: 'Nissan Rancagua',
+        puesto: 'Auxiliar',
+        tiempo: 'Marzo 2016 - Noviembre 2016',
+        desc: 'Asistente de marketing y asistente de ventas'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/colegio-vizcaya-logo.png',
+        title: 'Colegio Vizcaya de las Americas',
+        puesto: 'Servicio al cliente',
+        tiempo: 'Mayo 2015 - Agosto 2015',
+        desc: 'Trabajo de verano atendiendo a prospectos estudiantiles e ingresando la informacion en la base de datos'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/price-shoes-logo.png',
+        title: 'Price Shoes',
+        puesto: 'Supervisor',
+        tiempo: 'Junio 2013 - Junio 2014',
+        desc: 'Ventas por catalogo, manejo de inventario, pedidos y atencion al cliente preventa y post-venta'
+      }
+    ];
+
+    let expStartIndex = 0;
+    const expDisplayCount = 3;
+    const expContainer = document.getElementById('experienceCarousel');
+
+    function renderExperience() {
+      expContainer.innerHTML = '';
+      for (let i = 0; i < expDisplayCount; i++) {
+        const index = (expStartIndex + i) % experienceData.length;
+        const item = experienceData[index];
+        const boxOuter = document.createElement('div');
+        boxOuter.className = 'box-outer';
+        boxOuter.innerHTML = `
+          <div class="box">
+            <img src="${item.img}" alt="${item.title}">
+            <h2>${item.title}</h2>
+            <div class="subheading">Puesto: ${item.puesto}</div>
+            <div class="tenure">Tiempo: ${item.tiempo}</div>
+            <div class="description">${item.desc}</div>
+          </div>
+        `;
+        expContainer.appendChild(boxOuter);
+      }
+    }
+
+    function prevExperience() {
+      expStartIndex = (expStartIndex - expDisplayCount + experienceData.length) % experienceData.length;
+      renderExperience();
+    }
+
+    function nextExperience() {
+      expStartIndex = (expStartIndex + expDisplayCount) % experienceData.length;
+      renderExperience();
+    }
+
+    renderExperience();
+
+    // --- Carrusel 2: Adicionales ---
+    const adicionales = [
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/logo-elemon-1.png',
+        title: 'Elemon',
+        desc: 'Francisco es un verdadero profesional en su campo. Su atención al detalle y compromiso con la excelencia son admirables. Estoy muy satisfecho con los resultados obtenidos. ¡5 estrellas!'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/NEXOUD-LOGO.png',
+        title: 'Nexoud',
+        desc: 'Trabajar con Francisco fue una experiencia excepcional. Desde el primer día demostró un compromiso inquebrantable con nuestro proyecto y superó todas nuestras expectativas.'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/GLOWUP-LOGO.png',
+        title: 'GlowUp',
+        desc: 'Francisco fue sumamente profesional y trabajó con nosotros para comprender nuestras necesidades. Su enfoque estratégico nos ayudó a alcanzar nuestros objetivos de marketing.'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/MAGDALA-LOGO.png',
+        title: 'Magdala',
+        desc: 'Trabajar con Francisco ha sido una experiencia muy positiva. Su profesionalismo y disposición para adaptarse a nuestras necesidades han sido impresionantes. Estoy muy complacido con los resultados obtenidos.'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/ZAP-LOGO.png',
+        title: 'Zap',
+        desc: 'Recomiendo ampliamente a Francisco para cualquier proyecto de marketing. Su profesionalismo y experiencia realmente destacan. Nos brindó soluciones efectivas y nos guió en cada paso del camino.'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/LASERSENSE-LOGO.png',
+        title: 'LaserSense',
+        desc: 'Trabajar con Francisco fue, en general, una experiencia satisfactoria. Aprecio su compromiso y disposición para atender nuestras inquietudes.'
+      },
+      {
+        img: 'https://pan-cho.com/wp-content/uploads/2025/09/logo-buvardia.png',
+        title: 'Buvardia',
+        desc: 'Colaborar con Francisco fue inspirador. Su creatividad, visión estratégica y dedicación hicieron que nuestro proyecto alcanzara un nivel superior. Sin duda, volveríamos a trabajar con él.'
+      }
+    ];
+
+    let currentIndex = 0;
+    const additionalBox = document.getElementById('additionalBox');
+
+    function updateAdditional() {
+      const item = adicionales[currentIndex];
+      additionalBox.innerHTML = `
+        <img src="${item.img}" alt="${item.title}">
+        <h4>${item.title}</h4>
+        <p>${item.desc}</p>
+      `;
+    }
+
+    function prevAdditional() {
+      currentIndex = (currentIndex - 1 + adicionales.length) % adicionales.length;
+      updateAdditional();
+    }
+
+    function nextAdditional() {
+      currentIndex = (currentIndex + 1) % adicionales.length;
+      updateAdditional();
+    }
+
+    updateAdditional();
+
+    
+  </script>
+</body>
+</html>
