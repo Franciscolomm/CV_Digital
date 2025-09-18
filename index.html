@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Landing — Neon Gradient</title>
+  <style>
+    :root{
+      --bg: #000;
+      --card-bg: #0a0a0a;
+      --muted: #b5b5b5;
+      --gradient: linear-gradient(135deg,#00c6ff,#0072ff,#8e2de2,#ff0080);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",system-ui,sans-serif;}
+    body{ background:var(--bg); color:#fff; }
+
+    /* HEADER */
+    .header{
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+    }
+
+    .header img{
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .header-content{
+      position: absolute;
+      z-index:2;
+      text-align:center;
+      padding:0 1rem;
+      width:100%;
+    }
+    .header h1{ font-size:clamp(28px,6vw,48px); color:#fff;}
+    .header p{ color:#ddd; margin-top:0.6rem; }
+
+    /* BOXES */
+    .boxes{
+      max-width:1200px;
+      margin:-5rem auto 3rem;
+      padding:0 1rem;
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap:1.75rem;
+    }
+
+    .box-outer{
+      clip-path: polygon(5% 0, 95% 0, 100% 15%, 100% 85%, 95% 100%, 5% 100%, 0 85%, 0 15%);
+      background: var(--gradient);
+      padding:3px;
+      transition:transform .35s ease;
+    }
+    .box{
+      background: var(--card-bg);
+      padding:2rem 1.5rem;
+      text-align:center;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:0.9rem;
+    }
+
+    .box img{
+      width:150px;
+      height:150px;
+      object-fit:contain;
+      margin-bottom:0.5rem;
+    }
+
+    .box-outer:hover{
+      transform:translateY(-10px) scale(1.01);
+      box-shadow: 0 0 25px rgba(0,198,255,0.35),
+                  0 0 35px rgba(142,45,226,0.25),
+                  0 0 50px rgba(255,0,128,0.2);
+    }
+
+    .box h2{
+      font-size:1.4rem;
+      background: linear-gradient(90deg,#00c6ff,#ff0080);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .box p{
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    .cta{
+      margin-top:0.8rem;
+      padding:0.65rem 1.4rem;
+      border-radius:30px;
+      font-weight:600;
+      background:linear-gradient(135deg,#00c6ff,#ff0080);
+      color:#fff;
+      text-decoration:none;
+      transition:opacity .25s;
+    }
+    .cta:hover{opacity:0.85;}
+
+    /* 📱 MEDIA QUERIES */
+    @media (max-width: 768px){
+      .boxes{ margin:-2rem auto 2rem; gap:1.25rem; }
+      .box{ padding:1.5rem 1rem; }
+      .box h2{ font-size:1.2rem; }
+      .box p{ font-size:0.9rem; }
+      .box img{ width:110px; height:auto; }
+    }
+
+    @media (max-width: 480px){
+      .boxes{ margin:-1.5rem auto 1.5rem; gap:1rem; }
+      .box h2{ font-size:1.1rem; }
+      .box p{ font-size:0.85rem; }
+      .cta{ padding:0.5rem 1rem; font-size:0.85rem; }
+      .box img{ width:90px; height:auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <img src="https://pan-cho.com/wp-content/uploads/2025/07/PORTADA-FRANCISCO.png" alt="Portada Francisco">
+    <div class="header-content">
+      <!-- Opcional: títulos o CTA aquí -->
+    </div>
+  </header>
+
+  <!-- BOXES -->
+  <section class="boxes">
+    <!-- BOX 1 -->
+    <div class="box-outer">
+      <div class="box">
+        <img src="https://pan-cho.com/wp-content/uploads/2025/09/3d-renderizar-telefono-inteligente-con-encuesta-en-linea-de-relleno-manual-removebg-preview.png" alt="Experiencia">
+        <h2 id="box1-title">Mi Experiencia</h2>
+        <p id="box1-text">Un recorrido por mi trayectoria profesional, proyectos destacados y el impacto generado en cada etapa.</p>
+        <a class="cta" id="box1-btn" href="mi_experiencia.html">Ver Experiencia</a>
+      </div>
+    </div>
+
+    <!-- BOX 2 -->
+    <div class="box-outer">
+      <div class="box">
+        <img src="https://pan-cho.com/wp-content/uploads/2025/09/Blue_folder_with_information_about_employee_3D_illustration-removebg-preview.png" alt="Portfolio">
+        <h2 id="box2-title">Portfolio</h2>
+        <p id="box2-text">Una selección de trabajos y proyectos que muestran mis habilidades, creatividad y enfoque digital.</p>
+        <a class="cta" id="box2-btn" href="mi_portafolio.html">Explorar Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌐 SCRIPT DETECCIÓN DE IDIOMA -->
+  <script>
+    const lang = navigator.language || navigator.userLanguage;
+    if(lang.startsWith("en")){
+      document.documentElement.lang = "en";
+
+      document.getElementById("box1-title").textContent = "My Experience";
+      document.getElementById("box1-text").textContent = "A journey through my professional career, key projects, and the impact created along the way.";
+      document.getElementById("box1-btn").textContent = "View Experience";
+
+      document.getElementById("box2-title").textContent = "Portfolio";
+      document.getElementById("box2-text").textContent = "A selection of works and projects showcasing my skills, creativity, and digital approach.";
+      document.getElementById("box2-btn").textContent = "Explore Portfolio";
+    }
+  </script>
+
+</body>
+</html>
